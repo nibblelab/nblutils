@@ -111,9 +111,111 @@ Use this extension method to replace all occurences of a substring in a string
 
 ```
 var original_str = "This is only the beginning";
-var new_str = original_str.replaceAllt('th'); // is is only e beginning
+var new_str = original_str.replaceAll('th'); // is is only e beginning
 ```
 
+9 - Format CNJP
+
+```
+var cnpj = "00111222000101";
+var formatted = cnpj.formatCNPJ(); // 00.111.222/0001-01
+```
+
+10 - Format Time
+
+```
+var time = "133001";
+var formatted = time.formatTime(); // 13:30:01
+```
+
+11 - Format CEP
+
+```
+var cep = "0100570";
+var formatted = cep.formatCEP(); // 01005-70
+```
+
+12 - Format Phone
+
+```
+var phone = "12345678";
+var formatted = phone.formatPhone(); // 1234-5678
+
+var phone = "3412345678";
+var formatted = phone.formatPhone(); // (34) 1234-5678
+
+var phone = "34912345678";
+var formatted = phone.formatPhone(); // (34) 9 1234-5678
+
+var phone = "0800401402";
+var formatted = phone.formatPhone(); // 0800 401-402
+
+var phone = "08004014130";
+var formatted = phone.formatPhone(); // 0800 401-4130
+```
+
+
+13 - Clean Money String
+
+```
+var money_str = "1.250,75";
+var money_clean = money_str.cleanMoney(); // 1250.75 (string)
+```
+
+14 - Convert Money string to float
+
+```
+var money_str = "1.250,75";
+var money_clean = money_str.cleanMoney(); // 1250.75 (float)
+```
+
+
+15 - Check if string only contains numbers 
+
+```
+var a = "1.250,75";
+var b = "1250.75";
+if(a.isNumeric()) {  } // false
+if(b.isNumeric()) {  } // true
+```
+
+16 - Check if string is valid CPF
+
+```
+var a = "123.456.789-00";
+var b = "825.858.524-07";
+if(a.validCPF()) {  } // false
+if(b.validCPF()) {  } // true
+```
+
+
+17 - Check if string is valid CNPJ
+
+```
+var a = "12.234.456/7890-01";
+var b = "06.848.185/0001-75";
+if(a.validCNPJ()) {  } // false
+if(b.validCNPJ()) {  } // true
+```
+
+18 - Generate random sequence of digits
+
+```
+getRandomSequence(5); // 80325
+getRandomSequence(7); // 9982063
+```
+
+19 - Generate random ID
+
+```
+getRandomId(); // 201709070705318032520630
+```
+
+20 - Generate a blank image
+
+```
+var img = UtilImage.whiteOne;
+```
 
 
 ## i18n
