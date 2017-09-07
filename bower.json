@@ -1,0 +1,18 @@
+{
+  "name": "nblutils",
+  "authors": [
+    "Johnatas [Njerbaden] Teixeira de Freitas <johnatas@nibblelab.com>"
+  ],
+  "description": "JS/Angular modules with many useful functions",
+  "main": "",
+  "license": "MIT",
+  "homepage": "www.nibblelab.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public_html/bower_components",
+    "test",
+    "tests"
+  ]
+}
