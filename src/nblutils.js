@@ -1,3 +1,66 @@
+
+var nblutilsdata = {
+    provinces: {
+        'br': [
+            { code: "AC", name: "Acre" },
+            { code: "AL", name: "Alagoas" },
+            { code: "AM", name: "Amazonas" },
+            { code: "AP", name: "Amapá" },
+            { code: "BA", name: "Bahia" },
+            { code: "CE", name: "Ceará" },
+            { code: "DF", name: "Distrito Federal" },
+            { code: "ES", name: "Espírito Santo" },
+            { code: "GO", name: "Goiás" },
+            { code: "MA", name: "Maranhão" },
+            { code: "MG", name: "Minas Gerais" },
+            { code: "MS", name: "Mato Grosso do Sul" },
+            { code: "MT", name: "Mato Grosso" },
+            { code: "PA", name: "Pará" },
+            { code: "PB", name: "Paraíba" },
+            { code: "PE", name: "Pernambuco" },
+            { code: "PI", name: "Piauí" },
+            { code: "PR", name: "Paraná" },
+            { code: "RJ", name: "Rio de Janeiro" },
+            { code: "RN", name: "Rio Grande do Norte" },
+            { code: "RO", name: "Rondônia" },
+            { code: "RR", name: "Roraima" },
+            { code: "RS", name: "Rio Grande do Sul" },
+            { code: "SC", name: "Santa Catarina" },
+            { code: "SE", name: "Sergipe" },
+            { code: "SP", name: "São Paulo" },
+            { code: "TO", name: "Tocantins" }
+        ]
+    },
+    days: {
+        'br': [
+            { code: "Dom", num: '0', name: "Domingo" },
+            { code: "Seg", num: '1', name: "Segunda" },
+            { code: "Ter", num: '2', name: "Terça" },
+            { code: "Qua", num: '3', name: "Quarta" },
+            { code: "Qui", num: '4', name: "Quinta" },
+            { code: "Sex", num: '5', name: "Sexta" },
+            { code: "Sáb", num: '6', name: "Sábado" }
+        ]
+    },
+    months: {
+        'br': [
+            { code: "01", short: "Jan", name: "Janeiro" },
+            { code: "02", short: "Fev", name: "Fevereiro" },
+            { code: "03", short: "Mar", name: "Março" },
+            { code: "04", short: "Abr", name: "Abril" },
+            { code: "05", short: "Mai", name: "Maio" },
+            { code: "06", short: "Jun", name: "Junho" },
+            { code: "07", short: "Jul", name: "Julho" },
+            { code: "08", short: "Ago", name: "Agosto" },
+            { code: "09", short: "Set", name: "Setembro" },
+            { code: "10", short: "Out", name: "Outubro" },
+            { code: "11", short: "Nov", name: "Novembro" },
+            { code: "12", short: "Dez", name: "Dezembro" }
+        ]
+    }
+};
+
+
 angular.module('nblutils', [])
         .factory('$localstorage', ['$window', function ($window) {
             return {
@@ -15,48 +78,24 @@ angular.module('nblutils', [])
                 }
             };
         }])
-        .factory('$estados', function () {
+        .factory('$provinces', function () {
             
-            var estados = [
-                { sigla: "AC", nome: "Acre" },
-                { sigla: "AL", nome: "Alagoas" },
-                { sigla: "AM", nome: "Amazonas" },
-                { sigla: "AP", nome: "Amapá" },
-                { sigla: "BA", nome: "Bahia" },
-                { sigla: "CE", nome: "Ceará" },
-                { sigla: "DF", nome: "Distrito Federal" },
-                { sigla: "ES", nome: "Espírito Santo" },
-                { sigla: "GO", nome: "Goiás" },
-                { sigla: "MA", nome: "Maranhão" },
-                { sigla: "MG", nome: "Minas Gerais" },
-                { sigla: "MS", nome: "Mato Grosso do Sul" },
-                { sigla: "MT", nome: "Mato Grosso" },
-                { sigla: "PA", nome: "Pará" },
-                { sigla: "PB", nome: "Paraíba" },
-                { sigla: "PE", nome: "Pernambuco" },
-                { sigla: "PI", nome: "Piauí" },
-                { sigla: "PR", nome: "Paraná" },
-                { sigla: "RJ", nome: "Rio de Janeiro" },
-                { sigla: "RN", nome: "Rio Grande do Norte" },
-                { sigla: "RO", nome: "Rondônia" },
-                { sigla: "RR", nome: "Roraima" },
-                { sigla: "RS", nome: "Rio Grande do Sul" },
-                { sigla: "SC", nome: "Santa Catarina" },
-                { sigla: "SE", nome: "Sergipe" },
-                { sigla: "SP", nome: "São Paulo" },
-                { sigla: "TO", nome: "Tocantins" }
-            ];
+            var provinces = nblutilsdata.provinces;
             
             return {
-                get: function() {
-                    return estados;
+                get: function(country) {
+                    if(provinces.hasOwnProperty(country)) {
+                        return provinces[country];
+                    }
+                    return [];
                 },
-                getBySigla: function(sigla) {
-                    for(var k in estados)
+                getBy: function(country, search_by, data) {
+                    if(provinces[country][0].hasOwnProperty(search_by))
                     {
-                        if(estados[k].sigla == sigla)
-                        {
-                            return estados[k];
+                        for(var k in provinces[country]) {
+                            if(provinces[country][k][search_by] == data) {
+                                return provinces[country][k];
+                            }
                         }
                     }
                     
@@ -64,46 +103,53 @@ angular.module('nblutils', [])
                 }
             };
         })
-        .factory('$dias', function () {
+        .factory('$days', function () {
+            
+            var days = nblutilsdata.days;
+    
             return {
-                get: function() {
+                get: function(country) {
+                    if(days.hasOwnProperty(country)) {
+                        return days[country];
+                    }
+                    return [];
+                },
+                getBy: function(country, search_by, data) {
+                    if(days[country][0].hasOwnProperty(search_by))
+                    {
+                        for(var k in days[country]) {
+                            if(days[country][k][search_by] == data) {
+                                return days[country][k];
+                            }
+                        }
+                    }
                     
-                    var estados = [
-                        { sigla: "Dom", nome: "Domingo" },
-                        { sigla: "Seg", nome: "Segunda" },
-                        { sigla: "Ter", nome: "Terça" },
-                        { sigla: "Qua", nome: "Quarta" },
-                        { sigla: "Qui", nome: "Quinta" },
-                        { sigla: "Sex", nome: "Sexta" },
-                        { sigla: "Sáb", nome: "Sábado" }
-                    ];
-                    
-                    return estados;
-                    
+                    return {};
                 }
             };
         })
-        .factory('$meses', function () {
+        .factory('$months', function () {
+            
+            var months = nblutilsdata.months;
+    
             return {
-                get: function() {
+                get: function(country) {
+                    if(months.hasOwnProperty(country)) {
+                        return months[country];
+                    }
+                    return [];
+                },
+                getBy: function(country, search_by, data) {
+                    if(months[country][0].hasOwnProperty(search_by))
+                    {
+                        for(var k in months[country]) {
+                            if(months[country][k][search_by] == data) {
+                                return months[country][k];
+                            }
+                        }
+                    }
                     
-                    var estados = [
-                        { sigla: "01", nome: "Janeiro" },
-                        { sigla: "02", nome: "Fevereiro" },
-                        { sigla: "03", nome: "Março" },
-                        { sigla: "04", nome: "Abril" },
-                        { sigla: "05", nome: "Maio" },
-                        { sigla: "06", nome: "Junho" },
-                        { sigla: "07", nome: "Julho" },
-                        { sigla: "08", nome: "Agosto" },
-                        { sigla: "09", nome: "Setembro" },
-                        { sigla: "10", nome: "Outubro" },
-                        { sigla: "11", nome: "Novembro" },
-                        { sigla: "12", nome: "Dezembro" }
-                    ];
-                    
-                    return estados;
-                    
+                    return {};
                 }
             };
         })
@@ -121,7 +167,7 @@ angular.module('nblutils', [])
         })
         ;
 
-Number.prototype.formatMoney = function(c, d, t){
+Number.prototype.formatMoney = function(c, d, t) {
     if(this == undefined || this == null) return '0,00';
     var n = this, 
     c = isNaN(c = Math.abs(c)) ? 2 : c, 
@@ -155,10 +201,28 @@ String.prototype.formatCEP = function () {
 
 String.prototype.formatTelefone = function () {
     var n = this;
-    if (n.length == 10) {
+    if (n.indexOf("(") > -1) {
+        return n.replace(/^(\d*)/, "$1");
+    }
+    else if (n.length == 3) {
+        return n.replace(/^(\d{3})/, "$1");
+    }
+    else if (n.length == 8) {
+        return n.replace(/^(\d{4})(\d{4})/, "$1-$2");
+    }
+    else if (n.length == 10 && !(n.indexOf('0800') == 0)) {
         return n.replace(/^(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
     }
-    return n.replace(/^(\d{2})(\d{1})(\d{4})(\d{4})/, "($1) $2 $3-$4");
+    else if (n.length == 11 && !(n.indexOf('0800') == 0)) {
+        return n.replace(/^(\d{2})(\d{1})(\d{4})(\d{4})/, "($1) $2 $3-$4");
+    }
+    else if (n.length == 10 && (n.indexOf('0800') == 0)) {
+        return n.replace(/^(\d{4})(\d{3})(\d{3})/, "$1 $2-$3");
+    }
+    else if (n.length == 11 && (n.indexOf('0800') == 0)) {
+        return n.replace(/^(\d{4})(\d{3})(\d{4})/, "$1 $2-$3");
+    }
+    return n.replace(/^(\d*)/, "+$1");
 };
 
 String.prototype.cleanMoney = function () {
@@ -329,3 +393,6 @@ function getRandomId() {
     return (moment().format('YYYYMMDDHHMMSS') + getRandomSequence(10));
 }
 
+var UtilImage = {
+    whiteOne: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABWSURBVGiB7c+BCQAhEMCw9/ff+VxCMEgzQbtmZr4H/LcDTmlE04imEU0jmkY0jWga0TSiaUTTiKYRTSOaRjSNaBrRNKJpRNOIphFNI5pGNI1oGtE0otk8xARgkNjnHAAAAABJRU5ErkJggg=='
+};
