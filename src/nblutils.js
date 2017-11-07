@@ -153,7 +153,7 @@ angular.module('nblutils', [])
                 }
             };
         })
-        .factory('loadingInterceptor', function ($q, $window) {
+        .factory('loadingInterceptor', ['$q, $window', function ($q, $window) {
             return {
                 response: function (response) {
                     angular.element('#loadingdiv').hide();
@@ -164,7 +164,7 @@ angular.module('nblutils', [])
                     return $q.reject(response);
                 }
             };
-        })
+        }])
         ;
 
 Number.prototype.formatMoney = function(c, d, t) {
