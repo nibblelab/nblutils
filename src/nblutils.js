@@ -153,7 +153,7 @@ angular.module('nblutils', [])
                 }
             };
         })
-        .factory('loadingInterceptor', ['$q, $window', function ($q, $window) {
+        .factory('loadingInterceptor', ['$q', function ($q) {
             return {
                 response: function (response) {
                     angular.element('#loadingdiv').hide();
