@@ -234,6 +234,25 @@ nblutilsdata.days['us'] = [
 ]
 ```
 
+21 - Email validation
+
+To validate email strings use
+
+```
+if(email_string_var.validEmail()) {
+    //it's valid
+}
+```
+
+22 - Accented Letters
+
+To convert accented letters into not accented ones
+
+```
+var accented = "Isto é um teste de pão";
+var not_accented = accented.removeAccentedLetters(); // returns Isto e um teste de pao
+```
+
 
 ## License
 

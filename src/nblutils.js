@@ -378,6 +378,39 @@ String.prototype.validCNPJ = function () {
     }
 };
 
+String.prototype.validEmail = function() {
+    var email = this;
+    var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return (reg.test(email));
+};
+
+String.prototype.removeAccentedLetters = function () {
+    var str = this;
+    var map = {
+        a : /[\xE0-\xE6]/g,
+        A : /[\xC0-\xC6]/g,
+        e : /[\xE8-\xEB]/g,
+        E : /[\xC8-\xCB]/g,
+        i : /[\xEC-\xEF]/g,
+        I : /[\xCC-\xCF]/g,
+        o : /[\xF2-\xF6]/g,
+        O : /[\xD2-\xD6]/g,
+        u : /[\xF9-\xFC]/g,
+        U : /[\xD9-\xDC]/g,
+        c : /\xE7/g,
+        C : /\xC7/g,
+        n : /\xF1/g,
+        N : /\xD1/g
+    };
+
+    for (var letter in map) {
+        var expReg = map[letter];
+        str = str.replace(expReg,letter);
+    }
+
+    return str;
+};
+
 function getRandomSequence(size) {
     var arr = ['0','1','2','3','4','5','6','7','8','9'];
     var seq = '';
