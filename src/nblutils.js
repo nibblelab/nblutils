@@ -252,7 +252,7 @@ String.prototype.validCPF = function () {
     var numeros, digitos, soma, i, resultado, digitos_iguais;
     var cpf = '';
     
-    if(!isNumeric(cpf_in)) {
+    if(!cpf_in.isNumeric()) {
         for(i = 0; i < cpf_in.length; i++) {
             if(!isNaN(cpf_in.charAt(i)) && cpf_in.charAt(i) != ' ') {
                 cpf += cpf_in.charAt(i);
@@ -314,7 +314,7 @@ String.prototype.validCNPJ = function () {
     var numeros, digitos, soma, i, resultado, pos, tamanho, digitos_iguais;
     var cnpj = '';
     
-    if(!isNumeric(cnpj_in)) {
+    if(!cnpj_in.isNumeric()) {
         for(i = 0; i < cnpj_in.length; i++) {
             if(!isNaN(cnpj_in.charAt(i)) && cnpj_in.charAt(i) != ' ') {
                 cnpj += cnpj_in.charAt(i);
