@@ -255,7 +255,7 @@ var not_accented = accented.removeAccentedLetters(); // returns Isto e um teste 
 
 23 - Capitalize First Letter
 
-To capitalize the first letter of a string
+To capitalize the first letter in string
 
 ```
 var str = "not capitalized";
