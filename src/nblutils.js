@@ -199,6 +199,10 @@ String.prototype.formatCEP = function () {
     return this.replace(/^(\d{5})(\d{3})/, "$1-$2");
 };
 
+String.prototype.capitalizeFirstLetter = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+};
+
 String.prototype.formatPhone = function () {
     var n = this;
     if (n.indexOf("(") > -1) {

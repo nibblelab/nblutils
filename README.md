@@ -253,6 +253,15 @@ var accented = "Isto é um teste de pão";
 var not_accented = accented.removeAccentedLetters(); // returns Isto e um teste de pao
 ```
 
+23 - Capitalize First Letter
+
+To capitalize the first letter of a string
+
+```
+var str = "not capitalized";
+var cap_str = str.capitalizeFirstLetter(); // returns Not capitalized
+```
+
 
 ## License
 
