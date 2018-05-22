@@ -268,7 +268,7 @@ To shuffle an array
 
 ```
 var arr = [1,2,3,4,5];
-var arr_suffled = arr.shuffle(); // returns shuffled arr
+shuffleArray(arr); // shuffle arr
 ```
 
 ## License
@@ -279,5 +279,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Inspiration 
 
 * formatMoney from krosti: https://gist.github.com/krosti/4026177
-* array shuffle from think49: https://gist.github.com/think49/800308/d427fc5fbdeedfaa1df393cb82b2b61cd3d506d2
 

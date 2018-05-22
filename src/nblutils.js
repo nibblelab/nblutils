@@ -415,28 +415,14 @@ String.prototype.removeAccentedLetters = function () {
     return str;
 };
 
-Array.prototype.shuffle = function () {
-    var k, t, len;
-
-    len = this.length;
-
-    if (len < 2) {
-      return this;
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
-
-    while (len) {
-        k = Math.floor(Math.random() * len--);
-        t = this[k];
-
-        while (k < len) {
-          this[k] = this[++k];
-        }
-
-        this[k] = t;
-    }
-
-    return this;
-};
+}
 
 function getRandomSequence(size) {
     var arr = ['0','1','2','3','4','5','6','7','8','9'];
