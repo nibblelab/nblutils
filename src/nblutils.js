@@ -153,7 +153,7 @@ angular.module('nblutils', [])
                 }
             };
         })
-        .factory('$cep', function ($q, $http) {
+        .factory('$cep', ['$q', '$http', function ($q, $http) {
             return {
                 getAddress: function(cep, https) {
                     var p_cep = cep;
@@ -180,7 +180,7 @@ angular.module('nblutils', [])
 
                 }
             };
-        })
+        }])
         .factory('loadingInterceptor', ['$q', function ($q) {
             return {
                 response: function (response) {
