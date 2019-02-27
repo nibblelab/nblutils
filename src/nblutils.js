@@ -155,13 +155,13 @@ angular.module('nblutils', [])
         })
         .factory('$cep', ['$q', '$http', function ($q, $http) {
             return {
-                getAddress: function(cep, https) {
+                getAddress: function(cep, use_https) {
                     var p_cep = cep;
                     p_cep = p_cep.split('.').join('');
                     p_cep = p_cep.split('-').join('');
                     
                     var url = 'http://viacep.com.br';
-                    var _https = (https == undefined) ? true : false;
+                    var _https = (use_https == undefined) ? true : use_https;
                     if(_https) {
                         url = 'https://viacep.com.br';
                     }
