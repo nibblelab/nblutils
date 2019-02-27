@@ -161,7 +161,7 @@ angular.module('nblutils', [])
                     p_cep = p_cep.split('-').join('');
                     
                     var url = 'http://viacep.com.br';
-                    var _https = (https == undefined) ? false : true;
+                    var _https = (https == undefined) ? true : false;
                     if(_https) {
                         url = 'https://viacep.com.br';
                     }
