@@ -168,7 +168,7 @@ angular.module('nblutils', [])
                     
                     var deferred = $q.defer();
                     $http
-                        .get(url+'/ws/'+p_cep+'/json/ ')
+                        .get(url+'/ws/'+p_cep+'/json/')
                         .then(function(r) {
                             deferred.resolve(r.data);
                         }, 
