@@ -153,6 +153,34 @@ angular.module('nblutils', [])
                 }
             };
         })
+        .factory('$cep', function ($q, $http) {
+            return {
+                getAddress: function(cep, https) {
+                    var p_cep = cep;
+                    p_cep = p_cep.split('.').join('');
+                    p_cep = p_cep.split('-').join('');
+                    
+                    var url = 'http://viacep.com.br';
+                    var _https = (https == undefined) ? false : true;
+                    if(_https) {
+                        url = 'https://viacep.com.br';
+                    }
+                    
+                    var deferred = $q.defer();
+                    $http
+                        .get(url+'/ws/'+p_cep+'/json/ ')
+                        .then(function(r) {
+                            deferred.resolve(r.data);
+                        }, 
+                        function(r) {
+                            deferred.reject(r.status);
+                        });
+
+                    return deferred.promise;
+
+                }
+            };
+        })
         .factory('loadingInterceptor', ['$q', function ($q) {
             return {
                 response: function (response) {
@@ -441,4 +469,38 @@ function getRandomId() {
 
 var UtilImage = {
     whiteOne: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABWSURBVGiB7c+BCQAhEMCw9/ff+VxCMEgzQbtmZr4H/LcDTmlE04imEU0jmkY0jWga0TSiaUTTiKYRTSOaRjSNaBrRNKJpRNOIphFNI5pGNI1oGtE0otk8xARgkNjnHAAAAABJRU5ErkJggg=='
+};
+
+function isURLAnImage(url) {
+    return(url.toLowerCase().match(/\.(jpeg|jpg|gif|png)$/) != null);
+}
+
+var VarTester = {
+    isUndefined: function(v) {
+        if(v == undefined)
+            return true;
+        
+        if(typeof(v) == 'undefined')
+            return true;
+        
+        return false;
+    },
+    isEmpty: function(v) {
+        return (v == '');
+    },
+    isNull: function(v) {
+        return (v == null);
+    },
+    isZeroInt: function(v) {
+        return (v == 0);
+    },
+    isZeroFloat: function(v) {
+        return (v == 0.0);
+    },
+    isEmptyObject: function(v) {
+        return $.isEmptyObject(v);
+    },
+    isVoidStr: function(v) {
+        return (VarTester.isUndefined(v) || VarTester.isNull(v) || VarTester.isEmpty(v));
+    }
 };

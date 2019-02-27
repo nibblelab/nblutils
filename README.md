@@ -15,34 +15,34 @@ bower install nblutils
 <script src="bower_components/nblutils/dist/js/nblutils.min.js"></script>
 ```
 
-```
+```javascript
 angular.module('your_module', ['nblutils']);
 ```
 
 ### Using
 
 
-1 - Getting provinces array
+#### Get provinces array
 
-```
+```javascript
 var provinces = $provinces.get('br');
 ```
 
-2 - Getting months array
+#### Get months array
 
-```
+```javascript
 var months = $months.get('br');
 ```
 
-3 - Getting days array
+#### Get days array
 
-```
+```javascript
 var days = $days.get('br');
 ```
 
-4 - Wrapper for localstorage object
+#### Wrapper for localstorage object
 
-```
+```javascript
 $localstorage.set('key', value);
 var v = $localstorage.get('key' [, defalt_value]);
 
@@ -51,11 +51,11 @@ $localstorage.setObject('key', valueObject);
 var obj = $localstorage.getObject('key' [, default_object_value]);
 ```
 
-5 - Loading Spinner
+#### Loading Spinner
 
 In your HTML add this to the bottom
 
-```
+```javascript
 <div id="loadingdiv">
     <img src="path_to_your_ajax_loading_image" class="ajax-loader"/>
 </div>
@@ -63,13 +63,13 @@ In your HTML add this to the bottom
 
 Include CSS
 
-```
+```javascript
 <link href="bower_components/nblutils/dist/css/nblutils.min.css" rel="stylesheet" type="text/css" media="screen, print, projection">
 ```
 
 Add config to your angular module
 
-```
+```javascript
     .config(['$httpProvider', function($httpProvider) {
             $httpProvider.defaults.headers.common = {};
             $httpProvider.defaults.headers.post = {};
@@ -88,56 +88,56 @@ Add config to your angular module
 
 This will execute the loading spinner on every HTTP request
 
-6 - Format Money
+#### Format Money
 
 Use this extension method to convert float into money formatted strings:
 
-```
+```javascript
 var money_str = money_float.formatMoney(number_of_decimals [, decimal_point [, thousand_separator]]);
 ```
 
-7 - Replace Last
+#### Replace Last
 
 Use this extension method to replace the last occurence of a substring in a string
 
-```
+```javascript
 var original_str = "This is only the beginning";
 var new_str = original_str.replaceLast('th'); // This is only e beginning
 ```
 
-8 - Replace All
+#### Replace All
 
 Use this extension method to replace all occurences of a substring in a string
 
-```
+```javascript
 var original_str = "This is only the beginning";
 var new_str = original_str.replaceAll('th'); // is is only e beginning
 ```
 
-9 - Format CNJP
+#### Format CNJP
 
-```
+```javascript
 var cnpj = "00111222000101";
 var formatted = cnpj.formatCNPJ(); // 00.111.222/0001-01
 ```
 
-10 - Format Time
+#### Format Time
 
-```
+```javascript
 var time = "133001";
 var formatted = time.formatTime(); // 13:30:01
 ```
 
-11 - Format CEP
+#### Format CEP
 
-```
+```javascript
 var cep = "0100570";
 var formatted = cep.formatCEP(); // 01005-70
 ```
 
-12 - Format Phone
+#### Format Phone
 
-```
+```javascript
 var phone = "12345678";
 var formatted = phone.formatPhone(); // 1234-5678
 
@@ -154,71 +154,166 @@ var phone = "08004014130";
 var formatted = phone.formatPhone(); // 0800 401-4130
 ```
 
+#### Clean Money String
 
-13 - Clean Money String
-
-```
+```javascript
 var money_str = "1.250,75";
 var money_clean = money_str.cleanMoney(); // 1250.75 (string)
 ```
 
-14 - Convert Money string to float
+#### Convert Money string to float
 
-```
+```javascript
 var money_str = "1.250,75";
 var money_clean = money_str.cleanMoney(); // 1250.75 (float)
 ```
 
+#### Check if string only contains numbers 
 
-15 - Check if string only contains numbers 
-
-```
+```javascript
 var a = "1.250,75";
 var b = "1250.75";
 if(a.isNumeric()) {  } // false
 if(b.isNumeric()) {  } // true
 ```
 
-16 - Check if string is valid CPF
+#### Check if string is valid CPF
 
-```
+```javascript
 var a = "123.456.789-00";
 var b = "825.858.524-07";
 if(a.validCPF()) {  } // false
 if(b.validCPF()) {  } // true
 ```
 
+#### Check if string is valid CNPJ
 
-17 - Check if string is valid CNPJ
-
-```
+```javascript
 var a = "12.234.456/7890-01";
 var b = "06.848.185/0001-75";
 if(a.validCNPJ()) {  } // false
 if(b.validCNPJ()) {  } // true
 ```
 
-18 - Generate random sequence of digits
+#### Generate random sequence of digits
 
-```
+```javascript
 getRandomSequence(5); // 80325
 getRandomSequence(7); // 9982063
 ```
 
-19 - Generate random ID
+#### Generate random ID
 
-```
+```javascript
 getRandomId(); // 201709070705318032520630
 ```
 
-20 - Generate a blank image
+#### Generate a blank image (base64)
 
-```
+```javascript
 var img = UtilImage.whiteOne;
 ```
 
+#### Email validation
 
-## i18n
+To validate email strings use
+
+```javascript
+if(email_string_var.validEmail()) {
+    //it's valid
+}
+```
+
+#### Accented Letters
+
+To convert accented letters into not accented ones
+
+```javascript
+var accented = "Isto é um teste de pão";
+var not_accented = accented.removeAccentedLetters(); // returns Isto e um teste de pao
+```
+
+#### Capitalize First Letter
+
+To capitalize the first letter in string
+
+```javascript
+var str = "not capitalized";
+var cap_str = str.capitalizeFirstLetter(); // returns Not capitalized
+```
+
+#### Array shuffle
+
+To shuffle an array 
+
+```javascript
+var arr = [1,2,3,4,5];
+shuffleArray(arr); // shuffle arr
+```
+
+#### Search address by CEP (Brazil)
+
+```javascript
+var cep_value = '38.415-054'; // value with ou without . and -
+var use_https = true; // optional flag to use HTTPS. Default: true
+$cep.getAddress(cep_value, use_https).then(function(r) { 
+    console.log(r);
+    /*
+    result is an object:
+    {
+        "cep": "38415-054",
+        "logradouro": "Rua Diabase",
+        "complemento": "",
+        "bairro": "Dona Zulmira",
+        "localidade": "Uberlândia",
+        "uf": "MG",
+        "unidade": "",
+        "ibge": "3170206",
+        "gia": ""
+    }
+    */
+}, function(e) { console.log(e); });
+```
+
+#### Check if URL contain image 
+
+```javascript
+if(isURLAnImage(_var))
+{
+    // _var contains an image URL
+}
+```
+
+#### Test var
+
+```javascript
+if (VarTester.isVoidStr(_var)) {
+    // _var is a string
+}
+if (VarTester.isEmpty(_var)) {
+    // _var is a empty string
+}
+if (VarTester.isNull(_var)) {
+    // _var is null
+}
+if (VarTester.isUndefined(_var)) {
+    // _var is undefined
+}
+if (VarTester.isZeroInt(_var)) {
+    // _var is integer and 0
+}
+if (VarTester.isZeroFloat(_var)) {
+    // _var is float and 0
+}
+if (VarTester.isEmptyObject(_var)) {
+    // _var is an empty object
+}
+if (VarTester.isVoidStr(_var)) {
+    // _var is an invalid string
+}
+```
+
+### i18n
 
 To add provinces, days or months simply extend nblutilsdata object
 
@@ -232,43 +327,6 @@ nblutilsdata.days['us'] = [
     { code: "Fri", num: '5', name: "Friday" },
     { code: "Sat", num: '6', name: "Saturday" }
 ]
-```
-
-21 - Email validation
-
-To validate email strings use
-
-```
-if(email_string_var.validEmail()) {
-    //it's valid
-}
-```
-
-22 - Accented Letters
-
-To convert accented letters into not accented ones
-
-```
-var accented = "Isto é um teste de pão";
-var not_accented = accented.removeAccentedLetters(); // returns Isto e um teste de pao
-```
-
-23 - Capitalize First Letter
-
-To capitalize the first letter in string
-
-```
-var str = "not capitalized";
-var cap_str = str.capitalizeFirstLetter(); // returns Not capitalized
-```
-
-24 - Array shuffle
-
-To shuffle an array 
-
-```
-var arr = [1,2,3,4,5];
-shuffleArray(arr); // shuffle arr
 ```
 
 ## License
